@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+#define N 40
+int a[N][N]; 
+using namespace std;
+int main(){
+    int n,x,y;
+    freopen("magic.in","r",stdin);
+    freopen("magic.out","w",stdout);
+	scanf("%d",&n);
+	a[1][(n+1)/2]=1;
+	x=1;y=(n+1)/2;
+	for(int i=2;i<=n*n;i++){
+		if(x==1&&y!=n){a[n][y+1]=i;x=n;y++;}
+		else if(y==n&&x!=1) {a[x-1][1]=i;y=1;x--;}
+		else if(x==1&&y==n) {a[x+1][y]=i;x++;}
+		else if(x!=1&&y!=n){
+			if(a[x-1][y+1]){a[x+1][y]=i;x++;}
+			else {a[x-1][y+1]=i;x--;y++;}
+		}
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++)
+		    if(j==n) printf("%d",a[i][j]);
+		    else printf("%d ",a[i][j]);
+		printf("\n");
+	}
+	return 0;
+}
